@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="17.0.2" class="java.beans.XMLDecoder">
+ <object class="models.ConcordModel">
+  <void property="user">
+   <object class="models.User"/>
+  </void>
+  <void property="usermanager">
+   <object class="models.UserManager" id="UserManager0">
+    <void property="UM">
+     <void method="add">
+      <object class="models.User">
+       <void property="id">
+        <int>0</int>
+       </void>
+       <void property="password">
+        <string>lion</string>
+       </void>
+       <void property="realName">
+        <string>Jay</string>
+       </void>
+       <void property="userName">
+        <string>jhoya101</string>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="models.User">
+       <void property="id">
+        <int>0</int>
+       </void>
+       <void property="password">
+        <string>ppp</string>
+       </void>
+       <void property="realName">
+        <string>Benjamin</string>
+       </void>
+       <void property="userName">
+        <string>bbrob</string>
+       </void>
+      </object>
+     </void>
+    </void>
+   </object>
+  </void>
+ </object>
+</java>

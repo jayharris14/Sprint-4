@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.UserPageController">
+   <center>
+      <BorderPane prefHeight="388.0" prefWidth="362.0" BorderPane.alignment="CENTER">
+         <left>
+            <VBox maxHeight="-Infinity" prefHeight="280.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label text="Servers" />
+                  <ListView fx:id="serverView" maxHeight="-Infinity" prefHeight="250.0" prefWidth="200.0" />
+                  <Label text="Create Server" />
+                  <TextField fx:id="servernameLabel" />
+                  <Button mnemonicParsing="false" onAction="#onClickButton" text="Create" />
+               </children>
+            </VBox>
+         </left>
+         <right>
+            <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="200.0" prefWidth="100.0" translateY="92.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label text="Blocks" />
+                  <ListView fx:id="blockView" prefHeight="200.0" prefWidth="200.0" />
+               </children>
+            </VBox>
+         </right></BorderPane>
+   </center>
+</BorderPane>
