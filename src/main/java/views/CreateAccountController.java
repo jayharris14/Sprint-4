@@ -1,18 +1,22 @@
 package views;
 
+import java.rmi.AlreadyBoundException;
+import java.rmi.RemoteException;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import models.ViewTransitionModelInterface;
-import models.ConcordModel;
+import models.ViewTransitionalModel;
+import models.ConcordClientModel;
 
 public class CreateAccountController {
 		
 		ViewTransitionModelInterface model;
-		ConcordModel newmodel;
+		ConcordClientModel newmodel;
 	
-		public void setModel(ViewTransitionModelInterface newModel, ConcordModel secondnewmodel) {
-			model = newModel;
+		public void setModel(ViewTransitionModelInterface viewModel, ConcordClientModel secondnewmodel) {
+			model = viewModel;
 			newmodel=secondnewmodel;
 		}
 
@@ -26,19 +30,19 @@ public class CreateAccountController {
 	    private TextField nameLabel;
 
 	    @FXML
-	    void onClickSubmit(ActionEvent event) {
-	    	ConcordModel diskf=newmodel.ReadFromDisk();
+	    void onClickSubmit(ActionEvent event) throws RemoteException, AlreadyBoundException {
 	    	if (usernameLabel.textProperty().get()=="" || passwordLabel.textProperty().get()=="" || nameLabel.textProperty().get()=="") {
 	    		model.showError();
 	    	}
 	    	else {
-	    		newmodel.CreateUser(nameLabel.textProperty().get(), usernameLabel.textProperty().get(), passwordLabel.textProperty().get(), diskf);
+	    		newmodel.createuser(nameLabel.textProperty().get(), usernameLabel.textProperty().get(), passwordLabel.textProperty().get());
 	    		model.showLogin();
 	    	}
 	       
 	 
 
 	    }
+
 
 	}
 

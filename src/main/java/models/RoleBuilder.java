@@ -1,6 +1,8 @@
 package models;
 
-public class RoleBuilder 
+import java.io.Serializable;
+
+public class RoleBuilder implements Serializable
 {
 	public Role createUserRole(String name)
 	{	

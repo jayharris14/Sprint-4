@@ -1,7 +1,13 @@
 package models;
 
-public class Message
+import java.io.Serializable;
+
+public class Message implements Serializable
 {
+	@Override
+	public String toString() {
+		return User.userName +":" + content;
+	}
 	User User;
 	String content;
 	String timestamp;

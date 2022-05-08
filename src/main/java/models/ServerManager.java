@@ -7,8 +7,9 @@ public class ServerManager
 	Server server;
 	ArrayList<Server> SM= new ArrayList<Server>();
 	
-	public void addServer(Server server) {
-		SM.add(server);
+	public ArrayList<Server> addServer(Server server) {
+		this.SM.add(server);
+		return SM;
 	}
 	
 	
@@ -18,11 +19,13 @@ public class ServerManager
 	 */
 	public ServerManager(ArrayList<Server> sM) {
 		super();
-		SM = sM;
+		if (this.SM==null) {
+			this.SM=sM;
+		}
 	}
 	
 	public ServerManager() {
-		
+		this(null);
 	}
 
 

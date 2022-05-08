@@ -11,6 +11,7 @@ public class UserManager
 	User user;
 	ArrayList<User> UM=new ArrayList<User>();
 	
+	
 
 	
 	/**
@@ -66,10 +67,13 @@ public class UserManager
 	 */
 	public UserManager(ArrayList<User> uM) {
 		super();
-		this.UM = uM;
+		if (this.UM==null) {
+			this.UM=uM;
+		}
+		
 	}
 	public UserManager() {
-		
+		this(null);
 	}
 
 	public ArrayList<User> addUser(User user) {

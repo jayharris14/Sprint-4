@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.UserPageController">
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.CreateAccountController">
    <center>
       <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="375.0" prefWidth="300.0" BorderPane.alignment="CENTER">
          <top>
@@ -37,7 +37,7 @@
             </VBox>
          </center>
          <bottom>
-            <Button mnemonicParsing="false" onAction="#onClickSubmit" text="Submit" translateY="-20.0" BorderPane.alignment="CENTER" />
+            <Button id="submitbutton" mnemonicParsing="false" onAction="#onClickSubmit" text="Submit" translateY="-20.0" BorderPane.alignment="CENTER" />
          </bottom>
       </BorderPane>
    </center>

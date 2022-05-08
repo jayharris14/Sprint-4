@@ -2,18 +2,34 @@ package models;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
+import java.io.Serializable;
 
 
-public class User
+public class User implements Serializable
 {
 	String profileData;
 	String userName;
 	Role role;
 	HashMap<Server, Role> roles= new HashMap<Server, Role>();
 	UserManager usermanager;
+	ArrayList<Server> invites=new ArrayList<Server>();
 	
 	
 	
+	@Override
+	public String toString() {
+		return this.userName;
+	}
+
+	public ArrayList<Server> getInvites() {
+		return invites;
+	}
+
+	public void setInvites(ArrayList<Server> invites) {
+		this.invites = invites;
+	}
+
 	/**
 	 * @param profileData
 	 * @param userName
@@ -146,6 +162,9 @@ public class User
 	String profilePic;
 	String password;
 	
+	public void addInvite(Server server) {
+		this.invites.add(server);
+	}
 	
 	public String getPassword() {
 		return password;
@@ -173,8 +192,26 @@ public class User
 			this.userName=userName;
 			
 		}
+/*
+		@Override
+		public int hashCode() {
+			return Objects.hash(id, password, realName, userName);
+		}
+*/
+	/*	@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			User other = (User) obj;
+			return id == other.id && Objects.equals(password, other.password)
+					&& Objects.equals(realName, other.realName) && Objects.equals(userName, other.userName);
+		}
 		
-		
+		*/
 		
 		
 }

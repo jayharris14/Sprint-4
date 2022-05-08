@@ -1,6 +1,8 @@
 package models;
 
-public class Role
+import java.io.Serializable;
+
+public class Role implements Serializable
 {	
 	public String name;
 	boolean addModerator;
@@ -12,8 +14,23 @@ public class Role
 	boolean removeChannel;
 	boolean addMember;
 	
+	public Role(String name, boolean addModerator, boolean addChannel, boolean addAdmin, boolean removeMember,
+			boolean removeModerator, boolean inviteUser, boolean removeChannel, boolean addMember) {
+		super();
+		this.name = name;
+		this.addModerator = addModerator;
+		this.addChannel = addChannel;
+		this.addAdmin = addAdmin;
+		this.removeMember = removeMember;
+		this.removeModerator = removeModerator;
+		this.inviteUser = inviteUser;
+		this.removeChannel = removeChannel;
+		this.addMember = addMember;
+	}
+
+
 	public Role() {
-		
+		this("admin", true, true, true, true, true, true, true, true);
 	}
 	
 	

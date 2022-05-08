@@ -1,8 +1,9 @@
 package models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Channel
+public class Channel implements Serializable
 {
 	String name;
 	ArrayList<Message> messages= new ArrayList<Message>();

@@ -1,24 +1,47 @@
 package models;
 
+import java.io.Serializable;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 
-public class Server 
+
+public class Server implements Serializable
+
 {
+	User user=new User();
 	HashMap<User, Role> server= new HashMap<User, Role>();
+	ArrayList<Integer> userids1=new ArrayList<Integer>();
 	ArrayList<Channel> channels= new ArrayList<Channel>();
 	ArrayList<Channel> pins= new ArrayList<Channel>();
+	HashMap<User, Role> users= new HashMap<User, Role>();
+	ArrayList<User>users1=new ArrayList<User>();
 	String name;
 	RoleBuilder rolebuilder= new RoleBuilder();
     ServerManager servermanager;
     String autho="yes";
     Role role;
-    User admin;
+    User admin=new User();
+    public User getAdmin() {
+		return admin;
+	}
+
+    private static final long serialVersionUID= -2;
+
+
+	public void setAdmin(User admin) {
+		this.admin = admin;
+	}
+
+	int visits;
+    static User fakeuser=new User();
 	
 	Server(ServerManager servermanager){
 		servermanager.addServer(this);
 	}
+	
 	
 	
 	/**
@@ -28,39 +51,73 @@ public class Server
 	 * @param name
 	 * @param rolebuilder
 	 * @param servermanager
+	 * @throws RemoteException 
 	 */
-	public Server(HashMap<User, Role> server, ArrayList<Channel> channels, ArrayList<Channel> pins, String name, User admin) {
+	
+	public Server(HashMap<User, Role> server, ArrayList<Channel> channels, ArrayList<Channel> pins, String name, User admin,
+			RoleBuilder rolebuilder, ArrayList<Integer> userids) throws RemoteException {
 		super();
 		this.server = server;
 		this.channels = channels;
 		this.pins = pins;
 		this.name = name;
-		role = new Role();
-		role.name="admin";
-		admin.setRole(role);
-		this.addMember(admin, admin);
-		
+		this.rolebuilder = rolebuilder;
+		this.admin=admin;
+		this.userids1=userids;
 	}
-	public Server() {
-		this(null, null, null, "party", null);
+	public Server() throws RemoteException {
+		this(null, null, null, "party", null, null, null);
+	}
+	
+
+
+
+	public void addadmin(User admin) {
+		System.out.println(this.admin.userName);
+		this.server.put(this.admin, this.admin.roles.get(this));
+		this.userids1.add(this.admin.id);
+	}
+	
+	public void setadmin(User admin, Role role)
+	{	
+		visits++;
+		Role x=rolebuilder.createUserRole(role.name);
+		System.out.println(visits);
 	}
 
 	public void setRoleBuilder(User user, Role role)
 	{
 		Role x=rolebuilder.createUserRole(role.name);
-		user.setRole(x, this);
+		this.user=user;
+		System.out.println(user);
+		this.user.setRole(x, this);
 		
 	}
 
-	public String invite(User admin, User User) {
+	public ArrayList<Integer> getUserids1() {
+		return userids1;
+	}
+
+
+
+	public void setUserids1(ArrayList<Integer> userids1) {
+		this.userids1 = userids1;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return this.name;
+	}
+
+
+
+	public String invite(User admin, User User, Server server) {
 		String e="";
-	    if (admin.roles.get(this).inviteUser==true){
 		String c=User.userName;
+		User.addInvite(server);
 		e=c+ " invited to "+ this.name;
-		}	
-	    else {
-	    	e="permission denied";
-	    }
 		return e;
 	}
 
@@ -71,7 +128,7 @@ public class Server
 		if (admin.roles.get(this).removeMember==true) {
 		String a=user.userName;
 		String b=name;
-		this.removeMember(admin, user);
+		this.removeMember(user);
 		w=a+ "kicked from"+ b;
 		}
 		else {
@@ -81,14 +138,17 @@ public class Server
 		
 	}
 	
-	public String addChannel(User admin, Channel channel) {
+	public ArrayList<Channel> addChannel(User admin, Channel channel) {
 		if (admin.roles.get(this).addChannel==true) {
-		channels.add(channel);
+			System.out.println("hello");
+		this.channels.add(channel);
+		this.setChannels(channels);
 		}
 		else {
 			autho="no";
+			System.out.println("bye");
 		}
-		return autho;
+		return channels;
 	}
 	public String deleteChannel(User admin, Channel channel) {
 		if (admin.roles.get(this).removeChannel==true) {
@@ -125,33 +185,19 @@ public class Server
 		this.name = name;
 	}
 
-	public String addMember(User admin, User user){
+	public ArrayList<Integer> addMember(User user){
 		
-		if (admin.roles.get(this).addMember==true) {
-		Role D= new Role();
-		if (user.role==null) {
-			D.name="member";	
-		}
-		else {
-			D.name="admin";
-		}
-		this.setRoleBuilder(user, D);
-		server.put(user, user.roles.get(this));
-		}
-		else {
-			autho="no";
-	}
-		return autho;
+		this.server.put(user, user.roles.get(this));
+		this.userids1.add(user.id);
+		this.users1.add(user);
+		
+		return userids1;
 	}
 	
-	public String removeMember(User admin, User user) {
-		if (admin.roles.get(this).addMember==true) {
-		server.remove(user);
-	}
-		else {
-			autho="no";
-		}
-		return autho;
+	public void removeMember(User user) {
+		this.server.remove(user);
+		this.userids1.remove(user.id);
+		this.users1.remove(user);
 	}
 	
 	public void changeRole(Role newrole, User user) {

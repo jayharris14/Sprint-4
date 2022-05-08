@@ -1,22 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<java version="17.0.2" class="java.beans.XMLDecoder">
- <object class="models.ConcordModel">
+<java version="17.0.1" class="java.beans.XMLDecoder">
+ <object class="models.ConcordServer">
   <void property="user">
-   <object class="models.User"/>
+   <object class="models.User" id="User0">
+    <void property="id">
+     <int>4</int>
+    </void>
+    <void property="password">
+     <string>paz123</string>
+    </void>
+    <void property="realName">
+     <string>jay</string>
+    </void>
+    <void property="userName">
+     <string>jhoya101</string>
+    </void>
+   </object>
   </void>
   <void property="usermanager">
    <object class="models.UserManager" id="UserManager0">
     <void property="UM">
      <void method="add">
       <object class="models.User">
-       <void property="id">
-        <int>0</int>
-       </void>
        <void property="password">
-        <string>lion</string>
+        <string>paz123</string>
        </void>
        <void property="realName">
-        <string>Jay</string>
+        <string>jay</string>
        </void>
        <void property="userName">
         <string>jhoya101</string>
@@ -26,21 +36,43 @@
      <void method="add">
       <object class="models.User">
        <void property="id">
-        <int>0</int>
+        <int>2</int>
        </void>
        <void property="password">
-        <string>ppp</string>
+        <string>paz123</string>
        </void>
        <void property="realName">
-        <string>Benjamin</string>
+        <string>jay</string>
        </void>
        <void property="userName">
-        <string>bbrob</string>
+        <string>jhoya101</string>
        </void>
       </object>
      </void>
+     <void method="add">
+      <object class="models.User">
+       <void property="id">
+        <int>3</int>
+       </void>
+       <void property="password">
+        <string>paz123</string>
+       </void>
+       <void property="realName">
+        <string>jay</string>
+       </void>
+       <void property="userName">
+        <string>jhoya101</string>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object idref="User0"/>
+     </void>
     </void>
    </object>
+  </void>
+  <void property="visits">
+   <int>8</int>
   </void>
  </object>
 </java>
